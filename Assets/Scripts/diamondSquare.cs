@@ -29,19 +29,7 @@ public class scr_DiamondSquare : MonoBehaviour
             for (int y = 0; y < h; y++)
                 nArr[x, y] = 0;
 
-        // Asigna valores aleatorios a todos los bordes
-        for (int i = 0; i < width; i++)
-        {
-            nArr[0, i] = RandomAmplitude(); // borde superior
-            nArr[height - 1, i] = RandomAmplitude(); // borde inferior
-        }
-        for (int j = 0; j < height; j++)
-        {
-            nArr[j, 0] = RandomAmplitude(); // borde izquierdo
-            nArr[j, width - 1] = RandomAmplitude(); // borde derecho
-        }
-
-        // Esquinas también aleatorias
+        // Esquinas aleatorias
         nArr[0, 0] = RandomAmplitude();
         nArr[width - 1, 0] = RandomAmplitude();
         nArr[0, height - 1] = RandomAmplitude();
@@ -50,7 +38,6 @@ public class scr_DiamondSquare : MonoBehaviour
         return nArr;
     }
 
-    // Genera un valor aleatorio entre -amplitude y +amplitude
     // Genera un valor aleatorio entre -amplitude y +amplitude, pero nunca menor a -15
     private float RandomAmplitude(float amplitude = 10f)
     {
@@ -98,6 +85,7 @@ public class scr_DiamondSquare : MonoBehaviour
         // Calcula el promedio de las esquinas y suma un valor aleatorio limitado
         float rand = (float)(rnd.NextDouble() * 2.0 - 1.0) * amp;
         rand = Mathf.Max(rand, -5f); // Limita el mínimo a -5
+
         float nHeight = Average4(
             hm[Math.Max(x - rad, 0), Math.Max(y - rad, 0)],
             hm[Math.Max(x - rad, 0), Math.Min(y + rad, h - 1)],
@@ -115,6 +103,7 @@ public class scr_DiamondSquare : MonoBehaviour
         // Calcula el promedio de los bordes y suma un valor aleatorio limitado
         float rand = (float)(rnd.NextDouble() * 2.0 - 1.0) * amp;
         rand = Mathf.Max(rand, -5f); // Limita el mínimo a -5
+
         float nHeight = Average4(
             hm[Math.Max(x - rad, 0), y],
             hm[Math.Min(x + rad, w - 1), y],
